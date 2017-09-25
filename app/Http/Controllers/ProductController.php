@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -35,7 +36,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //logic to store product in database
+	$product = $this->validate(request(), [
+		'name' => 'required',
+		'price' => 'required|numeric'
+	]);
+	
+	Product::create($product);
+	return back()->with('success', 'Product has been added');
     }
 
     /**
