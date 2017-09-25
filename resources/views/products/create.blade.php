@@ -9,6 +9,19 @@
 	<body>
 		<div class="container">
 		<h2>Create A Product</h2><br />
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+			</ul>
+		</div><br />
+		@endif
+		@if (\Session::has('success'))
+		<div class="alert alert-success">
+			<p>{{ \Session::get('success') }}</p>
+		</div><br />
+		@endif
 		<form method="post" action="{{url('products')}}">
 		{{csrf_field()}}
 			<div class="row">
